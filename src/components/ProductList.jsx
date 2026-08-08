@@ -1,4 +1,5 @@
 import useProducts from "../hooks/useProducts";
+import ProductItem from "./ProductItem";
 
 function ProductList() {
   const { products, loading, error } = useProducts();
@@ -17,20 +18,10 @@ function ProductList() {
 
       <div>
         {products.map((product) => (
-          <div key={product.id}>
-            <img
-              src={product.thumbnail}
-              alt={product.title}
-              width="180"
-              loading="lazy"
-            />
-
-            <h3>{product.title}</h3>
-
-            <p>
-               ₹{Math.round(product.price * 90).toLocaleString("en-IN")}
-           </p>
-          </div>
+          <ProductItem
+            key={product.id}
+            product={product}
+          />
         ))}
       </div>
     </div>
