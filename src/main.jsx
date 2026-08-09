@@ -6,6 +6,7 @@ import {
 } from "react-router-dom";
 
 import "./index.css";
+import "./App.css";
 
 const Home = lazy(() => import("./pages/Home"));
 const ProductDetail = lazy(() => import("./pages/ProductDetail"));

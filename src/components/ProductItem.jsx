@@ -7,27 +7,34 @@ function ProductItem(props) {
   const dispatch = useDispatch();
 
   return (
-    <div>
+    <div className="product-card">
       <img
         src={product.thumbnail}
         alt={product.title}
-        width="180"
         loading="lazy"
       />
 
       <h3>{product.title}</h3>
 
-      <p>
+      <p className="product-price">
         ₹{Math.round(product.price * 90).toLocaleString("en-IN")}
       </p>
 
-      <Link to={`/product/${product.id}`}>
-        View Details
-      </Link>
+      <div className="product-actions">
+        <Link
+          className="details-btn"
+          to={`/product/${product.id}`}
+        >
+          View Details
+        </Link>
 
-      <button onClick={() => dispatch(addToCart(product))}>
-  Add to Cart
-</button>
+        <button
+          className="add-cart-btn"
+          onClick={() => dispatch(addToCart(product))}
+        >
+          Add to Cart
+        </button>
+      </div>
     </div>
   );
 }

@@ -27,10 +27,10 @@ function ProductList() {
   }
 
   return (
-    <div>
+    <div className="product-section" id="products">
       <h2>Our Products</h2>
 
-      <input
+      <input className="search-box"
         type="text"
         placeholder="Search products..."
         value={searchTerm}
@@ -39,7 +39,7 @@ function ProductList() {
         }
       />
 
-      <div>
+      <div className="product-grid">
         {filteredProducts.map((product) => (
           <ProductItem
             key={product.id}
