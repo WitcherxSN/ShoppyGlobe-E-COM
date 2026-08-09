@@ -1,10 +1,92 @@
+import { useState } from "react";
+import { useSelector } from "react-redux";
 import Header from "../components/Header";
 
 function Checkout() {
+  const cartItems = useSelector((state) => state.cart.items);
+
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [address, setAddress] = useState("");
+
+  const totalPrice = cartItems.reduce(
+    (total, item) => total + item.price * item.quantity,
+    0
+  );
+
+  function handleSubmit(event) {
+    event.preventDefault();
+
+    console.log("Order submitted");
+  }
+
   return (
     <>
       <Header />
-      <h1>Checkout</h1>
+
+      <main>
+        <h1>Checkout</h1>
+
+        <form onSubmit={handleSubmit}>
+          <div>
+            <label>Full Name</label>
+
+            <input
+              type="text"
+              placeholder="Enter your full name"
+              value={name}
+              onChange={(event) => setName(event.target.value)}
+            />
+          </div>
+
+          <div>
+            <label>Email</label>
+
+            <input
+              type="email"
+              placeholder="Enter your email"
+              value={email}
+              onChange={(event) => setEmail(event.target.value)}
+            />
+          </div>
+
+          <div>
+            <label>Delivery Address</label>
+
+            <textarea
+              placeholder="Enter your delivery address"
+              value={address}
+              onChange={(event) => setAddress(event.target.value)}
+            />
+          </div>
+
+          <h2>Order Summary</h2>
+
+          {cartItems.map((item) => (
+            <div key={item.id}>
+              <p>
+                {item.title} × {item.quantity}
+              </p>
+
+              <p>
+                ₹
+                {Math.round(
+                  item.price * item.quantity * 90
+                ).toLocaleString("en-IN")}
+              </p>
+            </div>
+          ))}
+
+          <h2>
+            Total: ₹
+            {Math.round(totalPrice * 90).toLocaleString("en-IN")}
+          </h2>
+
+          <button type="submit">
+            Place Order
+          </button>
+        </form>
+      </main>
     </>
   );
 }
