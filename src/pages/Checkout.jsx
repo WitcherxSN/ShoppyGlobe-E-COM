@@ -4,22 +4,23 @@ import Header from "../components/Header";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { clearCart } from "../redux/cartSlice";
+import {
+  selectCartItems,
+  selectCartTotalPrice,
+} from "../redux/cartSlice";
 
 function Checkout() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
   const [message, setMessage] = useState("");
-  const cartItems = useSelector((state) => state.cart.items);
+  const cartItems = useSelector(selectCartItems);
 
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [address, setAddress] = useState("");
 
-  const totalPrice = cartItems.reduce(
-    (total, item) => total + item.price * item.quantity,
-    0
-  );
+  const totalPrice = useSelector(selectCartTotalPrice);
 
   function handleSubmit(event) {
   event.preventDefault();

@@ -2,14 +2,15 @@ import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import Header from "../components/Header";
 import CartItem from "../components/CartItem";
+import {
+  selectCartItems,
+  selectCartTotalPrice,
+} from "../redux/cartSlice";
 
 function Cart() {
-  const cartItems = useSelector((state) => state.cart.items);
+  const cartItems = useSelector(selectCartItems);
 
-  const totalPrice = cartItems.reduce(
-    (total, item) => total + item.price * item.quantity,
-    0
-  );
+ const totalPrice = useSelector(selectCartTotalPrice);
 
   return (
     <>

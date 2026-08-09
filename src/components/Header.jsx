@@ -1,13 +1,9 @@
 import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
+import { selectCartTotalItems } from "../redux/cartSlice";
 
 function Header() {
-    const cartItems = useSelector((state) => state.cart.items);
-
-const totalItems = cartItems.reduce(
-  (total, item) => total + item.quantity,
-  0
-);
+   const totalItems = useSelector(selectCartTotalItems);
   return (
     <header>
       <h2>ShoppyGlobe</h2>

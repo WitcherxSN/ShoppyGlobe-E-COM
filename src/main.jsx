@@ -7,13 +7,14 @@ import {
 
 import "./index.css";
 
-import Home from "./pages/Home";
-import ProductDetail from "./pages/ProductDetail";
-import Cart from "./pages/Cart";
-import Checkout from "./pages/Checkout";
-import NotFound from "./pages/NotFound";
+const Home = lazy(() => import("./pages/Home"));
+const ProductDetail = lazy(() => import("./pages/ProductDetail"));
+const Cart = lazy(() => import("./pages/Cart"));
+const Checkout = lazy(() => import("./pages/Checkout"));
+const NotFound = lazy(() => import("./pages/NotFound"));
 import { Provider } from "react-redux";
 import store from "./redux/store";
+import { lazy, Suspense } from "react";
 
 const router = createBrowserRouter([
   {
@@ -39,9 +40,11 @@ const router = createBrowserRouter([
 ]);
 
 createRoot(document.getElementById("root")).render(
-   <StrictMode>
+  <StrictMode>
     <Provider store={store}>
-      <RouterProvider router={router} />
+      <Suspense fallback={<h2>Loading...</h2>}>
+        <RouterProvider router={router} />
+      </Suspense>
     </Provider>
   </StrictMode>
 );
