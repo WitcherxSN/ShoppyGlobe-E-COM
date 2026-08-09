@@ -50,73 +50,95 @@ function Checkout() {
 
   return (
     <>
-      <Header />
+    <Header />
 
-      <main>
-        <h1>Checkout</h1>
+    <main>
+      <div className="checkout-page">
 
-        <form onSubmit={handleSubmit}>
-          <div>
-            <label>Full Name</label>
+        <div className="checkout-form-card">
+          <h1>Checkout</h1>
 
-            <input
-              type="text"
-              placeholder="Enter your full name"
-              value={name}
-              onChange={(event) => setName(event.target.value)}
-            />
-          </div>
+          <form onSubmit={handleSubmit}>
+            <div className="checkout-group">
+              <label>Full Name</label>
 
-          <div>
-            <label>Email</label>
+              <input
+                type="text"
+                placeholder="Enter your full name"
+                value={name}
+                onChange={(event) => setName(event.target.value)}
+              />
+            </div>
 
-            <input
-              type="email"
-              placeholder="Enter your email"
-              value={email}
-              onChange={(event) => setEmail(event.target.value)}
-            />
-          </div>
+            <div className="checkout-group">
+              <label>Email</label>
 
-          <div>
-            <label>Delivery Address</label>
+              <input
+                type="email"
+                placeholder="Enter your email"
+                value={email}
+                onChange={(event) => setEmail(event.target.value)}
+              />
+            </div>
 
-            <textarea
-              placeholder="Enter your delivery address"
-              value={address}
-              onChange={(event) => setAddress(event.target.value)}
-            />
-          </div>
+            <div className="checkout-group">
+              <label>Delivery Address</label>
 
+              <textarea
+                placeholder="Enter your delivery address"
+                value={address}
+                onChange={(event) => setAddress(event.target.value)}
+              />
+            </div>
+
+            {message && (
+              <p className="checkout-message">
+                {message}
+              </p>
+            )}
+
+            <button
+              className="place-order-btn"
+              type="submit"
+            >
+              Place Order
+            </button>
+          </form>
+        </div>
+
+        <div className="checkout-summary">
           <h2>Order Summary</h2>
 
           {cartItems.map((item) => (
-            <div key={item.id}>
-              <p>
+            <div
+              className="checkout-summary-item"
+              key={item.id}
+            >
+              <span>
                 {item.title} × {item.quantity}
-              </p>
+              </span>
 
-              <p>
+              <span>
                 ₹
                 {Math.round(
                   item.price * item.quantity * 90
                 ).toLocaleString("en-IN")}
-              </p>
+              </span>
             </div>
           ))}
 
-          <h2>
-            Total: ₹
-            {Math.round(totalPrice * 90).toLocaleString("en-IN")}
-          </h2>
-          {message && <p>{message}</p>}
+          <div className="checkout-total">
+            <span>Total</span>
 
-          <button type="submit">
-            Place Order
-          </button>
-        </form>
-      </main>
-    </>
+            <span>
+              ₹{Math.round(totalPrice * 90).toLocaleString("en-IN")}
+            </span>
+          </div>
+        </div>
+
+      </div>
+    </main>
+  </>
   );
 }
 
