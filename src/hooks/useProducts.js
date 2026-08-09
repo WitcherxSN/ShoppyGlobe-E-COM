@@ -9,7 +9,7 @@ function useProducts() {
     async function fetchProducts() {
       try {
         setLoading(true);
-
+// Fetch products from the DummyJSON API
         const response = await fetch(
           "https://dummyjson.com/products"
         );
@@ -21,6 +21,7 @@ function useProducts() {
         const data = await response.json();
 
         setProducts(data.products);
+        // Handle API or network errors
       } catch (error) {
         setError(error.message);
       } finally {

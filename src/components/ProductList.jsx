@@ -4,14 +4,15 @@ import { useDispatch, useSelector } from "react-redux";
 import { setSearchTerm } from "../redux/searchSlice";
 
 function ProductList() {
+  // Fetch product data using the custom hook
   const { products, loading, error } = useProducts();
 
   const dispatch = useDispatch();
-
+ // Get the current search term from Redux
   const searchTerm = useSelector(
     (state) => state.search.term
   );
-
+// Filter products based on the user's search
   const filteredProducts = products.filter((product) =>
     product.title
       .toLowerCase()

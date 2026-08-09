@@ -23,7 +23,8 @@ function HeroSlider() {
       text: "Find great products at great prices.",
     },
   ];
-
+  
+// Automatically change the hero slide every 4 seconds
   useEffect(() => {
     const timer = setInterval(() => {
       setCurrentSlide((previousSlide) => {

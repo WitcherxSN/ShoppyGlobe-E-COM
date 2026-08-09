@@ -7,7 +7,7 @@ import {
 
 import "./index.css";
 import "./App.css";
-
+// Lazy-load pages for better performance and code splitting
 const Home = lazy(() => import("./pages/Home"));
 const ProductDetail = lazy(() => import("./pages/ProductDetail"));
 const Cart = lazy(() => import("./pages/Cart"));

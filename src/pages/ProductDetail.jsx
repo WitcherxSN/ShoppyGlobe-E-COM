@@ -10,7 +10,7 @@ function ProductDetail() {
   const [product, setProduct] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
-
+// Fetch the selected product using the ID from the URL
   useEffect(() => {
     async function fetchProduct() {
       try {

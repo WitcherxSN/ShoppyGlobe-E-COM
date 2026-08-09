@@ -22,6 +22,7 @@ function Checkout() {
 
   const totalPrice = useSelector(selectCartTotalPrice);
 
+// Validate checkout details and complete the order
   function handleSubmit(event) {
   event.preventDefault();
 
@@ -40,9 +41,9 @@ function Checkout() {
   }
 
   setMessage("Order placed");
-
+// Clear all items from the Redux cart
   dispatch(clearCart());
-
+// Redirect the user to Home after showing the success message
   setTimeout(() => {
     navigate("/");
   }, 1500);
