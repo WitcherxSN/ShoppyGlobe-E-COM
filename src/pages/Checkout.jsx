@@ -1,8 +1,15 @@
 import { useState } from "react";
 import { useSelector } from "react-redux";
 import Header from "../components/Header";
+import { useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
+import { clearCart } from "../redux/cartSlice";
 
 function Checkout() {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+
+  const [message, setMessage] = useState("");
   const cartItems = useSelector((state) => state.cart.items);
 
   const [name, setName] = useState("");
@@ -15,10 +22,30 @@ function Checkout() {
   );
 
   function handleSubmit(event) {
-    event.preventDefault();
+  event.preventDefault();
 
-    console.log("Order submitted");
+  if (
+    name.trim() === "" ||
+    email.trim() === "" ||
+    address.trim() === ""
+  ) {
+    setMessage("Please fill in all fields.");
+    return;
   }
+
+  if (cartItems.length === 0) {
+    setMessage("Your cart is empty.");
+    return;
+  }
+
+  setMessage("Order placed");
+
+  dispatch(clearCart());
+
+  setTimeout(() => {
+    navigate("/");
+  }, 1500);
+}
 
   return (
     <>
@@ -81,6 +108,7 @@ function Checkout() {
             Total: ₹
             {Math.round(totalPrice * 90).toLocaleString("en-IN")}
           </h2>
+          {message && <p>{message}</p>}
 
           <button type="submit">
             Place Order
